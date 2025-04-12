@@ -23,7 +23,7 @@ A full-stack Todo application built with **ReactJS** for frontend **NestJS** for
 ### 🔧 Step 1: Build and Run
 
 ```bash
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 This will:
