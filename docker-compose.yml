@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    container_name: todo-app-backend
     ports:
       - "3000:3000"
     depends_on:
@@ -40,6 +41,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.11.1
     container_name: filebeat
+    command: filebeat -e -strict.perms=false
     user: root
     depends_on:
       - elasticsearch

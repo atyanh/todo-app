@@ -1,7 +1,7 @@
 filebeat.inputs:
   - type: container
     paths:
-      - /var/lib/docker/containers/*/*.log
+      - /var/lib/docker/containers/*/*json.log
     json.keys_under_root: true
     json.add_error_key: true
     processors:
@@ -12,18 +12,15 @@ processors:
       when:
         not:
           equals:
-            container.name: "todo-app-backend-1"
-  - decode_json_fields:
-      fields: ["log"]
-      target: "app"
-      overwrite_keys: true
+            container.name: "todo-app-backend"
 
 output.elasticsearch:
   hosts: ["http://elasticsearch:9200"]
   index: "app-logs-%{+yyyy.MM.dd}"
 
 setup.template.name: "app-logs"
-setup.template.pattern: "app-logs-*"
+setup.template.pattern: "app-logs*"
+
 
 setup.kibana:
   host: "http://kibana:5601"
